@@ -1,0 +1,176 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-myeventplanner-dev-114617-authRole",
+      "UnauthRoleArn": "arn:aws:iam::749603740151:role/amplify-myeventplanner-dev-114617-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::749603740151:role/amplify-myeventplanner-dev-114617-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-myeventplanner-dev-114617-deployment",
+      "UnauthRoleName": "amplify-myeventplanner-dev-114617-unauthRole",
+      "StackName": "amplify-myeventplanner-dev-114617",
+      "StackId": "arn:aws:cloudformation:us-east-1:749603740151:stack/amplify-myeventplanner-dev-114617/57fe7020-d0a4-11ed-ac79-121fa0eff083",
+      "AmplifyAppId": "d2wehid3qpw64z"
+    }
+  },
+  "auth": {
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "myeventplannerAuth",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ]
+        }
+      ],
+      "lastPushTimeStamp": "2023-04-01T20:13:21.411Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-myeventplanner-dev-114617-deployment/amplify-cfn-templates/auth/userPoolGroups-cloudformation-template.json",
+        "logicalId": "authuserPoolGroups"
+      },
+      "output": {
+        "adminsGroupRole": "arn:aws:iam::749603740151:role/us-east-1_4ENgx3shV-adminsGroupRole"
+      },
+      "lastPushDirHash": "mgdJRN1pnRteFpdAh8bgWA98T50="
+    },
+    "myeventplannerAuth": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-myeventplanner-dev-114617-deployment/amplify-cfn-templates/auth/myeventplannerAuth-cloudformation-template.json",
+        "logicalId": "authmyeventplannerAuth"
+      },
+      "lastPushTimeStamp": "2023-04-01T20:13:21.423Z",
+      "output": {
+        "UserPoolId": "us-east-1_4ENgx3shV",
+        "AppClientIDWeb": "5j877lrfmfpn4mth88m1ln547p",
+        "AppClientID": "47o7hlhj3b8i3soq70gjd55k23",
+        "IdentityPoolId": "us-east-1:15bc8d5f-dacb-4f73-a803-2af515abc7e9",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:749603740151:userpool/us-east-1_4ENgx3shV",
+        "IdentityPoolName": "myeventplannerIdentityPool__dev",
+        "UserPoolName": "myeventplannerUserPool"
+      },
+      "lastPushDirHash": "OLYsIddyPIzjeI+JtkPTNssPaq0="
+    }
+  },
+  "api": {
+    "myeventplanner": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "myeventplannerAuth"
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AWS_IAM"
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authmyeventplannerAuth"
+              }
+            }
+          ]
+        },
+        "GraphQLAPIIdOutput": "hkoif3tmffhatjtshpz2hsn4fa",
+        "GraphQLAPIEndpointOutput": "https://w7l7gvya4zatpbt4oygnu5jeqa.appsync-api.us-east-1.amazonaws.com/graphql"
+      },
+      "lastPushTimeStamp": "2023-04-01T20:13:23.110Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-myeventplanner-dev-114617-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apimyeventplanner"
+      },
+      "lastPushDirHash": "aIjreS97KdVtClKK4/U6oIJm6eI="
+    }
+  },
+  "storage": {
+    "EventImages": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "lastPushTimeStamp": "2023-04-01T20:13:21.428Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-myeventplanner-dev-114617-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storageEventImages"
+      },
+      "output": {
+        "BucketName": "myeventplannerbucket114617-dev",
+        "Region": "us-east-1"
+      },
+      "lastPushDirHash": "OvuIcuhy/YBAa7LoF4F+XG8csDA="
+    }
+  },
+  "function": {
+    "FindSuitableRooms": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "myeventplanner",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        }
+      ],
+      "lastBuildTimeStamp": "2023-04-01T20:08:36.239Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2023-04-01T20:08:39.542Z",
+      "distZipFilename": "FindSuitableRooms-4b5374697178557a464e-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-myeventplanner-dev-114617-deployment",
+        "s3Key": "amplify-builds/FindSuitableRooms-4b5374697178557a464e-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-myeventplanner-dev-114617-deployment/amplify-cfn-templates/function/FindSuitableRooms-cloudformation-template.json",
+        "logicalId": "functionFindSuitableRooms"
+      },
+      "lastPushTimeStamp": "2023-04-01T20:13:23.110Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::749603740151:role/myeventplannerLambdaRoleaf94ef46-dev",
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:749603740151:function:FindSuitableRooms-dev",
+        "Name": "FindSuitableRooms-dev",
+        "LambdaExecutionRole": "myeventplannerLambdaRoleaf94ef46-dev"
+      },
+      "lastPushDirHash": "HVp+EP0E+Bg64SsmGOyUTNf9ELA="
+    }
+  }
+}

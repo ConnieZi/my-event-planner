@@ -1,0 +1,19 @@
+{
+    "AppSyncApiName": "myeventplanner",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authmyeventplannerAuth",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "S3DeploymentBucket": "amplify-myeventplanner-dev-114617-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/fbde8b894e3b592793151ecfbbc3b270dc6b0fca"
+}
