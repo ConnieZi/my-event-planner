@@ -1,4 +1,5 @@
-# base
+# my-event-planner
+A web application built with AWS Amplify and Vue.js
 
 ## Project setup
 
